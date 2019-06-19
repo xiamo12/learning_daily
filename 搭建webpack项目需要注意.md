@@ -1,0 +1,94 @@
+# 搭建一个webpack打包项目，需要注意：
+
+- 加载lodash依赖的时候，需要安装在生产依赖而不是开发依赖中：
+
+  ```
+  $ sudo cnpm install lodash -S
+  ```
+
+- 加载html-webpack-plugin插件的时候，忘记了配置文件应该怎么写了：
+
+  ```javascript
+  const path = require("path");
+  const htmlWebpackPlugin = require("html-webpack-plugin");
+  const htmlPlugin = new htmlWebpackPlugin({
+    template: path.join(__dirname,"./dist/index.html"),
+    filename: "index.html",
+  });
+  
+  module.exports = {
+    mode: "development",
+    plugins:[htmlPlugin],
+  };
+  ```
+
+- 加载插件顺序为：
+
+  ```
+  sudo cnpm install webpack -D
+  sudo cnpm install webpack-cli -D
+  sudo cnpm install lodash -S
+  sudo cnpm install webpack-dev-server -D
+  sudo cnpm install html-webpack-plugin -D
+  ```
+
+- 配置文件需要编写的部分【主要是html-webpack-plugin插件的配置】：
+
+  ```
+  const path = require("path");
+  const htmlWebpackPlugin = require("html-webpack-plugin");
+  const htmlPlugin = new htmlWebpackPlugin({
+    template: path.join(__dirname,"./dist/index.html"),
+    filename: "index.html",
+  });
+  
+  module.exports = {
+    mode: "development",
+    plugins:[htmlPlugin],
+  };
+  ```
+
+- js文件需要编写的部分
+
+  ```
+  import _ from "lodash";
+  ```
+
+# 在react中创建组件
+
+终端安装react、react-dom：
+
+```
+$ sudo cnpm install react react-dom -D
+```
+
+### 启用jsx语法：
+
+- 安装babel插件
+
+```
+$ sudo cnpm install babel-core babel-loader babel-plugin-transform-runtime -D
+$ sudo cnpm install babel-preset-stage-0 -D
+$ sudo cnpm install babel-preset-react -D
+```
+
+- 创建.babelrc文件并编写代码：
+
+```json
+{
+  "presets": ["env","stage-0","react"],
+  "plugins": ["transform-runtime"],
+}
+```
+
+- 编写配置文件【记得一定要写exclude排除项】
+
+```javascript
+module:{
+  rules:[
+    {test:/\.js|jsx$/, use:["babel-loader"],exclude:/node_modules/}
+  ]
+}
+```
+
+### 
