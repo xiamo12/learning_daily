@@ -34,7 +34,7 @@
 
 - 配置文件需要编写的部分【主要是html-webpack-plugin插件的配置】：
 
-  ```
+  ```javascript
   const path = require("path");
   const htmlWebpackPlugin = require("html-webpack-plugin");
   const htmlPlugin = new htmlWebpackPlugin({
@@ -50,7 +50,7 @@
 
 - js文件需要编写的部分
 
-  ```
+  ```javascript
   import _ from "lodash";
   ```
 
